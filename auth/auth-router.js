@@ -21,12 +21,13 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  let { username, password } = req.body;
+  let {username, password} = req.body;
 
   Users.findBy({ username })
     .first()
     .then(user => {
-      if (user && bcrypt.compareSync(password, user.password)) {
+      // user.password = hash;
+      if (user && bcrypt.compare(password, user.password)) {
         // sign token
         const token = signToken(user); // new line
 
@@ -62,7 +63,7 @@ function signToken(user) {
   const secret = process.env.JWT_SECRET || "is it secret, is it safe?";
 
   const options = {
-    expiresIn: "1h",
+    expiresIn: "4h",
   };
 
   return jwt.sign(payload, secret, options); // notice the return

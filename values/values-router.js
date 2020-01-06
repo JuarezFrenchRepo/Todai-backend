@@ -12,7 +12,7 @@ const Values = require("../values/values-model.js");
 
 /// GET ///
 
-router.get("/values", restricted, (req, res) => {
+router.get("/", restricted, (req, res) => {
   values.find()
     .then(values => {
       res.json(values);

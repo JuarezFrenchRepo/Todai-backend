@@ -12,6 +12,9 @@ const usersRouter = require('../users/users-router.js');
 
 const server = express();
 
+server.get("/", (req, res) => {
+  res.status(200).json({ api: "Server is up and running", dbenv: process.env.DB_ENV });
+});
 
 server.use(helmet());
 server.use(express.json());
@@ -23,8 +26,6 @@ server.use('/api/users', authenticate,usersRouter);
 // server.use('/api/projects', authenticate, projectsRouter);
 server.use('/api/values', authenticate,valuesRouter);
 
-server.get("/", (req, res) => {
-  res.status(200).json({ api: "Server is up and running", dbenv: process.env.DB_ENV });
-});
+
 
 module.exports = server;

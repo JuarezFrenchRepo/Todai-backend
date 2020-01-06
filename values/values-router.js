@@ -1,11 +1,10 @@
 const router = require("express").Router();
-
-const knex = require('knex');
-const config = require('../knexfile.js');
-
-const restricted = require("../auth/authenticate-middleware");
+const knex = require("knex");
+const config = require("../knexfile.js");
 const db = knex(config.development);
-const Values = require("../values/values-model.js");
+const Values = require("./values-model.js");
+const restricted = require("../auth/authenticate-middleware");
+
 
 
 // for endpoints beginning with /api/auth

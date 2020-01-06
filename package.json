@@ -19,7 +19,7 @@
     "url": "https://github.com/JuarezFrenchRepo/Todai-backend/issues"
   },
   "homepage": "https://github.com/JuarezFrenchRepo/Todai-backend#readme",
-  "dependencies": {
+  "devDependencies": {
     "bcrypt": "^3.0.7",
     "connect-session-knex": "^1.5.0",
     "cors": "^2.8.5",
@@ -33,5 +33,10 @@
     "nodemon": "^2.0.2",
     "sqlite3": "^4.1.1",
     "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^6.0.3",
+    "sqlite3": "^4.1.1"
   }
 }

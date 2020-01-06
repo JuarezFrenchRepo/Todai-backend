@@ -3,11 +3,11 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 
-const authenticate = require('../auth/authenticate-middleware');
-const authRouter = require('../auth/auth-router');
+const authenticate = require('./auth/authenticate-middleware');
+const authRouter = require('./auth/auth-router');
 // const projectsRouter = require('../projects/projects-router.js');
-const valuesRouter = require('../values/values-router.js');
-const usersRouter = require('../users/users-router.js');
+const valuesRouter = require('./values/values-router.js');
+const usersRouter = require('./users/users-router.js');
 
 
 const server = express();

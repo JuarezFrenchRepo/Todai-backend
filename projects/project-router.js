@@ -12,7 +12,9 @@ router.get("/", restricted, (req, res) => {
     .then(projects => {
       res.json(projects);
     })
-    .catch(err => res.status(500).json({ message: "Error on the GET project" }));
+    .catch(err =>
+      res.status(500).json({ message: "Error on the GET project" })
+    );
 });
 
 router.get("/:id", restricted, (req, res) => {
@@ -30,17 +32,14 @@ router.post("/", (req, res) => {
   const project = req.body;
 
   Project.add(project)
-      .then(project => {
-          res.status(201).json(project);
-      })
-      .catch(err => {
-          console.log("Error inserting project:", err);
-          res.status(201).json({ message: "Failed to create new project" });
-      });
+    .then(project => {
+      res.status(201).json(project);
+    })
+    .catch(err => {
+      console.log("Error inserting project:", err);
+      res.status(201).json({ message: "Failed to create new project" });
+    });
 });
-
-
-
 
 /// PUT ///
 
@@ -72,8 +71,7 @@ router.delete("/:id", restricted, (req, res) => {
 
   const { id } = req.params;
   // const changes = req.body;
-  Project
-  .findBy({ id })
+  Project.findBy({ id })
     .remove()
     // .update(changes)
     .then(count => {

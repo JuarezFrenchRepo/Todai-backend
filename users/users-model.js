@@ -32,7 +32,7 @@ function findBy(username) {
 )}
 
 function update(username, changes) {
-  return db('users')
+  return db('user_profile')
     .where({ username })
     .update(changes, '*');
 }

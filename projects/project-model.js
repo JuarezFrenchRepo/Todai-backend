@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function find() {
-  return db('project').select('id', 'name', 'description');
+  return db('projects').select('id', 'name', 'description');
 }
 
 // function findBy(filter) {
@@ -18,7 +18,7 @@ function find() {
 // }
 
 async function add(project) {
-  const [id] = await db('project').insert(project);
+  const [id] = await db('projects').insert(project);
 
   return findById(id);
 }

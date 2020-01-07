@@ -23,7 +23,6 @@ async function add(user) {
   return findById(id);
 }
 
-
 function findBy(username) {
   return (
   db('user_profile')

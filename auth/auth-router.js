@@ -10,7 +10,7 @@ const Users = require("../users/users-model.js");
 // for endpoints beginning with /api/auth
 router.post("/register", (req, res) => {
   let user = req.body;
-  const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
+  const hash = bcrypt.hashSync(user.password, 10); 
   user.password = hash;
 
   Users.add(user)
@@ -18,7 +18,7 @@ router.post("/register", (req, res) => {
       res.status(201).json(saved);
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(501).json(error);
     });
 });
 

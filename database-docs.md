@@ -1,11 +1,11 @@
-Tōdai Backend					Jan 6, 2020 1:00 pm Lambda time
+Tōdai Backend					Jan 7, 2020 5:45am Lambda time
 
 Here are the current user endpoints for the back-end.  Values and projects will be similar, I'll post those soon. This API allows you to view, post, edit and delete users, values, projects and their associated actions.
 
-WHAT CHANGED:
+## WHAT CHANGED:
 
 * added the base url
-* changed the endpoints to  /auth/user for user ops.
+* changed the endpoints to /user for user ops. Got rid of the "auth" in the endpoints.
  
  
 Base URL : https://todai-backend.herokuapp.com/
@@ -48,3 +48,27 @@ Change the value in the user object.
 }
  
 - DELETE /api/auth/users/Mo - removes a given user by username and all associated data
+
+## Model Users
+
+  {
+    "id": 2,
+    "username": "Lisa",
+    "password": "pass",
+    "email": "lisa@springfield.org",
+    "phone": "541-555-1312"
+  },
+  {
+    "id": 3,
+    "username": "Maggie",
+    "password": "pass",
+    "email": "maggie@springfield.org",
+    "phone": "541-555-1312"
+  },
+  {
+    "id": 4,
+    "username": "Bart",
+    "password": "pass",
+    "email": "bart@springfield.org",
+    "phone": "541-555-1312"
+  },

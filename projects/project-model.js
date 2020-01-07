@@ -23,23 +23,23 @@ async function add(project) {
   return findById(id);
 }
 
-function findBy(project) {
+function findBy(id) {
   return (
   db('projects')
-  .where(project)
+  .where(id)
   .select('id', 'project', 'description')
   // return db('project').select('id', 'project', 'password', 'email', 'phone');
 )}
 
-function update(project, changes) {
+function update(id, changes) {
   return db('projects')
-    .where({ project })
+    .where({ id })
     .update(changes, '*');
 }
 
 function remove(project) {
-  return db('project')
-    .where({ project })
+  return db('id')
+    .where({ id })
     .del();
 }
 

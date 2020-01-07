@@ -15,10 +15,9 @@ router.get("/", restricted, (req, res) => {
     .catch(err => res.status(500).json({ message: "Unable to GET values" }));
 });
 
-router.get("/:value",restricted,(req, res) => {
+router.get("/:id",restricted,(req, res) => {
     const { value } = req.params;
-    values
-      .findBy(value)
+    Values.findBy(value)
       .then(values => {
         res.json(values);
       })
@@ -29,7 +28,7 @@ router.get("/:value",restricted,(req, res) => {
 
   /// PUT ///
 
-  router.put("/:value", restricted, (req, res) => {
+  router.put("/:id", restricted, (req, res) => {
     const { value } = req.params;
     const changes = req.body;
 
@@ -53,13 +52,13 @@ router.get("/:value",restricted,(req, res) => {
 
 /// DELETE ///
 
-router.delete("/:value", restricted, (req, res) => {
+router.delete("/:id", restricted, (req, res) => {
   // const {value} = req.params.id;
 
-  const { value } = req.params;
+  const { id } = req.params;
   // const changes = req.body;
 
-  Values.remove({ value })
+  Values.remove({ id })
     // .update(changes)
     .then(count => {
       if (count > 0) {

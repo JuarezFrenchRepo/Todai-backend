@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function find() {
-  return db('values').select('id', 'value');
+  return db('values').select('id', 'value', 'value_basis');
 }
 
 // function findBy(filter) {
@@ -31,14 +31,14 @@ function findBy(value) {
   // return db('values').select('id', 'valuename', 'password', 'email', 'phone');
 )}
 
-function update(value, changes) {
+function update(id, changes) {
   return db("values")
-    .where({ value})
+    .where({ id})
     .update(changes, "*");
 }
 
-function remove(value) {
+function remove(id) {
   return db("values")
-    .where({ values})
+    .where({id})
     .del();
 }

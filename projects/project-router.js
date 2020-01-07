@@ -16,7 +16,7 @@ router.get("/", restricted, (req, res) => {
 });
 
 router.get("/:id", restricted, (req, res) => {
-  const { project } = req.params;
+  const { id } = req.params;
   Project.findBy({ id })
     .then(project => {
       res.json(project);

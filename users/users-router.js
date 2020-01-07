@@ -56,7 +56,7 @@ router.delete("/:username", restricted, (req, res) => {
   // const changes = req.body;
   Users
   .findBy({ username })
-    .remove()
+    .remove(username)
     // .update(changes)
     .then(count => {
       if (count > 0) {

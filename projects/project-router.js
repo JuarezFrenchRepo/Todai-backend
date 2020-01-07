@@ -24,6 +24,24 @@ router.get("/:id", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
+/// POST ///
+
+router.post("/", (req, res) => {
+  const project = req.body;
+
+  Project.add(project)
+      .then(project => {
+          res.status(201).json(project);
+      })
+      .catch(err => {
+          console.log("Error inserting project:", err);
+          res.status(500).json({ message: "Failed to create new project" });
+      });
+});
+
+
+
+
 /// PUT ///
 
 router.put("/:id", restricted, (req, res) => {

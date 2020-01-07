@@ -1,10 +1,10 @@
-Tōdai Backend					Jan 7, 2020 12:30am Lambda time
+Tōdai Backend					Jan 7, 2020 1:38 pm Lambda time
 
 Here are the current user endpoints for the back-end.  Values and projects will be similar, I'll post those soon. This API allows you to view, post, edit and delete users, values, projects and their associated actions.
 
 ## WHAT CHANGED:
 
-* Added endpoints for Projects  endpoint:  `/projects`
+* Added endpoints for Values  endpoint:  `/api/values`
 * New Changes are at the bottom.
 
  
@@ -118,4 +118,53 @@ Change the value in the project object.
     "id": 3,
     "name": "Watch NCAA football championship",
     "description": "Watch the championship and get all the requisites."
+  },
+
+  //// VALUES ////
+
+  ## Values
+Access to protected routes will require login with username and password. A json token will be issued upon login. The tokens are limited to 4 hour session.
+*Endpoints*
+ 
+The following endpoints are available.
+ 
+ -GET /api/values - gets all projects
+ 
+- GET /api/values/id - gets project by ID
+
+ - POST  /api/values - creates new project
+    
+     {
+
+    "value": "Mindfulness"
+
+  },
+
+  # NOTE:  There are two other fields that will be used by the front-end:
+  "top_three" (Boolean true/false) and "value_basis"  (text)  Value basis is the reason that the value is in the user's top 3. 
+ 
+- PUT /api/values/:id  - updates a given value by id:
+
+Change the value in the project object.
+
+ {
+    "id": 8,
+    "value": "Mindfulness"
+  }
+ 
+- DELETE /api/values/:id - removes a given project by username and all associated data by id.
+
+# Model Values
+
+ {
+    "id": 2,
+    "value": "Art and Literature"
+  },
+  {
+    "id": 1,
+    "value": "Athletic ability"
+  },
+  {
+    "id": 3,
+    "value": "Creativity, discovering or inventing"
   },

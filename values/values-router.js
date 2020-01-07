@@ -10,7 +10,7 @@ const Values = require("./values-model.js");
 router.get("/", restricted, (req, res) => {
   Values.find()
     .then(values => {
-      res.status(200).res.json(values);
+      res.json(values);
     })
     .catch(err => res.status(500).json({ message: "Unable to GET values" }));
 });
@@ -36,7 +36,7 @@ router.get(
     const changes = req.body;
 
     db("value")
-      .where({ value })
+      .where({ id })
       .update(changes)
       .then(count => {
         if (count) {

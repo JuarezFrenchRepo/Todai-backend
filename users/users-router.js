@@ -2,16 +2,19 @@ const router = require("express").Router();
 const knex = require("knex");
 const config = require("../knexfile.js");
 const db = knex(config.development);
-const Users = require("./users-model.js");
 const restricted = require("../auth/authenticate-middleware");
+const Users = require("./users-model.js");
+
+/// GET ///
 
 router.get("/", restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
     })
-    .catch(err => res.send(err));
+    .catch(err => res.status(500).json({ message: "Error on the GET users" }));
 });
+
 router.get("/:username", restricted, (req, res) => {
   const { username } = req.params;
   Users.findBy({ username })
@@ -20,6 +23,8 @@ router.get("/:username", restricted, (req, res) => {
     })
     .catch(err => res.send(err));
 });
+
+/// PUT ///
 
 router.put("/:username", restricted, (req, res) => {
   const { username } = req.params;
@@ -41,6 +46,8 @@ router.put("/:username", restricted, (req, res) => {
       res.status(500).json({ message: "Failed to update user" });
     });
 });
+
+/// DELETE ///
 
 router.delete("/:username", restricted, (req, res) => {
   // const {username} = req.params.id;

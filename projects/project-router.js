@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
       })
       .catch(err => {
           console.log("Error inserting project:", err);
-          res.status(500).json({ message: "Failed to create new project" });
+          res.status(201).json({ message: "Failed to create new project" });
       });
 });
 

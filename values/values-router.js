@@ -15,7 +15,10 @@ router.get("/", restricted, (req, res) => {
     .catch(err => res.status(500).json({ message: "Unable to GET values" }));
 });
 
-router.get("/:id",restricted,(req, res) => {
+router.get(
+  "/:id",
+  restricted,
+  (req, res) => {
     const { value } = req.params;
     Values.findBy(value)
       .then(values => {

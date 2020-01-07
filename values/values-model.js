@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function find() {
-  return db('values').select('id', 'value', 'value_basis');
+  return db('values').select('id', 'value');
 }
 
 // function findBy(filter) {
@@ -23,10 +23,10 @@ async function add(value) {
   return findById(id);
 }
 
-function findBy(value) {
+function findBy(id) {
   return (
   db('values')
-    .where(value)
+    .where(id)
     .select("id", "value", "top_pick", "value_basis")
   // return db('values').select('id', 'valuename', 'password', 'email', 'phone');
 )}

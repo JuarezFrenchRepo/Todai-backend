@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function find() {
-  return db('project').select('id', 'project', 'value_basis', 'top_pick');
+  return db('project').select('id', 'name', 'description');
 }
 
 // function findBy(filter) {

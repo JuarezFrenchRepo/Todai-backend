@@ -12,7 +12,7 @@ router.get("/", restricted, (req, res) => {
     .then(values => {
       res.status(200).res.json(values);
     })
-    .catch(err => res.status(500).json({ message: "Error on the GET values" }));
+    .catch(err => res.status(500).json({ message: "Unable to GET values" }));
 });
 
 router.get("/:value",restricted,(req, res) => {

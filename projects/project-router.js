@@ -64,6 +64,15 @@ router.put("/:id", restricted, (req, res) => {
     });
 });
 
+// function findProjects(id) {
+//   return db("projects as p")
+//       .select("u.username", "v.value")
+//       .join("user_id asu", "u.project_id","p.id")
+//       // .orderBy("st.step_number")
+//       .where("u.project_id", id)
+     
+// }
+
 
 
 /// DELETE ///

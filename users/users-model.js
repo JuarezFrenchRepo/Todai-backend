@@ -4,9 +4,11 @@ module.exports = {
   add,
   find,
   findBy,
+  findById,
   update,
   remove,
-  findProjects
+  findProjects,
+  findValues
 
 
 };
@@ -34,10 +36,11 @@ function findBy(username) {
   // return db('user_profile').select('id', 'username', 'password', 'email', 'phone');
 )}
 
-function findBy(id) {
+function findById(id) {
+  console.log('Id in model',id)
   return (
-  db('user_profile')
-  .where(id)
+  db("user_profile")
+  .where({id})
   .first()
   .select('*')
   // return db('user_profile').select('id', 'username', 'password', 'email', 'phone');
@@ -66,7 +69,7 @@ function remove(username) {
 // }
 
 function findProjects(id) {
-  return db("users_profile as u")
+  return db("user_profile as u")
       .select("u.username", "p.name")
       .join("projects as p", "p.user_id","u.id")
       // .orderBy("st.step_number")
@@ -76,4 +79,14 @@ function findProjects(id) {
 
 
 
+
+
+function findValues(id) {
+  return db("user_profile as u")
+      .select("u.username", "v.value")
+      .join("values as v", "v.user_id","u.id")
+      // .orderBy("st.step_number")
+      .where("u.id", id)
+     
+}
 

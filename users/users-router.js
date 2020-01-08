@@ -8,39 +8,70 @@ const Users = require("./users-model.js");
 /// GET ///
 
 router.get("/", restricted, (req, res) => {
-  Users.find()
-    .then(users => {
+  const {username} =req.query
+  const query = Users.find();
+  
+  if (username){
+    query.where({username})
+  }
+    query.then(users => {
       res.json(users);
     })
     .catch(err => res.status(500).json({ message: "Error on the GET users" }));
 });
 
-router.get("/:username", restricted, (req, res) => {
-  const { username } = req.params;
-  Users.findBy({ username })
+// router.get("/", restricted, (req, res) => {
+//   const {id} =req.query
+//   const query = Users.find();
+  
+//   if (id){
+//     query.where({id})
+//   }
+//     query.then(users => {
+//       res.json(users);
+//     })
+//     .catch(err => res.status(500).json({ message: "Error on the GET users" }));
+// });
+
+
+// router.get("/:username", restricted, (req, res) => {
+//   // console.log('Id in router 19',id)
+//   const { username } = req.params;
+//   Users.findBy({ username })
+//     .then(users => {
+//       if (users) {
+//         res.json(users);
+//       } else {
+//         res.status(404).json({ message: "Could not find user with given id." });
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: "Failed to get user" });
+//     });
+// });
+
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  Users.findById(id)
+  
     .then(users => {
-      res.json(users);
+      if (users) {
+        res.json(users);
+      } else {
+        res.status(404).json({ message: "Could not find user with given id." });
+      }
     })
-    .catch(err => res.send(err));
-});
-router.get("/:id", restricted, (req, res) => {
-  const { id }  = req.params;
-  Users.findBy({ id })
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => res.send(err));
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get user" });
+    });
 });
 
 /// PUT ///
 
 router.put("/:username", restricted, (req, res) => {
-  const {username} = req.params;
+  const { username } = req.params;
   const changes = req.body;
-
-  // 
-  Users
-    .update(username, changes)
+  Users.update(username, changes)
     .then(count => {
       if (count) {
         res.json({ update: count });
@@ -57,42 +88,62 @@ router.put("/:username", restricted, (req, res) => {
 
 /// DELETE ///
 
-router.delete('/:username', (req, res) => {
-  const username = req.params
-  db('user_profile')
-    .where({username})
+router.delete("/:username", (req, res) => {
+  const username = req.params;
+  db("user_profile")
+    .where({ username })
     .del()
-  .then(count => {
-    if (count > 0) {
-      res.status(204).end();
-    } else {
-      res.status(404).json({ message: 'Record not found' });
-    }
-  })
-  .catch(error => {
-    res.status(500).json(error);
-  });
+    .then(count => {
+      if (count > 0) {
+        res.status(204).end();
+      } else {
+        res.status(404).json({ message: "Record not found" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
 });
 
-router.get('/:id/projects', (req, res) => {
-  const {id} = req.params;
+router.get("/:id/projects", (req, res) => {
+  const { id } = req.params;
 
   Users.findProjects(id)
-  .then(projects => {
-    if (projects) {
-      res.json(projects);
-    } else {
-      res.status(404).json({ message: 'Could not find projects for given id' })
-    }
-  })
-  .catch(err => {
-    res.status(500).json({ message: 'Failed to get projects' });
-  });
+    .then(projects => {
+      if (projects) {
+        res.json(projects);
+      } 
+      else 
+      {
+         res
+           .status(404)
+           .json({ message: "Could not find projects for given id" });
+       }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get projects" });
+    });
 });
 
+router.get("/:id/values", (req, res) => {
+  const { id } = req.params;
 
-
-
+  Users.findValues(id)
+    .then(values => {
+      if (values) {
+        res.json(values);
+      } 
+      else 
+      {
+         res
+           .status(404)
+           .json({ message: "Could not find vales for given id" });
+       }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get values" });
+    });
+});
 
 
 

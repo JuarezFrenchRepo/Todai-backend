@@ -27,12 +27,12 @@ router.get("/:username", restricted, (req, res) => {
 /// PUT ///
 
 router.put("/:username", restricted, (req, res) => {
-  const { username } = req.params;
+  const {username} = req.params;
   const changes = req.body;
 
-  db("user_profile")
-    .where({ username })
-    .update(changes)
+  // 
+  Users
+    .update(username, changes)
     .then(count => {
       if (count) {
         res.json({ update: count });

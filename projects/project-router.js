@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
 
   Project.add(project)
     .then(project => {
-      res.status(201).json(project);
+     json(project);
     })
     .catch(err => {
       console.log("Error inserting project:", err);

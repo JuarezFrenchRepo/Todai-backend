@@ -15,7 +15,7 @@ router.post("/register", (req, res) => {
 
   Users.add(user)
     .then(user => {
-      res.status(201).json(user.name);
+      res.status(201).json(user);
     })
     .catch(error => {
       res.status(500).json(error);
@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
         // send the token
         res.status(200).json({
           token, // added token as part of the response sent
-          message: `Welcome ${user.username}!`
+          message: `Welcome ${user.username}, You're logged in!`
         });
       } else {
         res.status(401).json({ message: "Invalid Credentials" });

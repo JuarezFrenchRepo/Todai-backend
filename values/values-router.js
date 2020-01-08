@@ -32,10 +32,10 @@ router.get(
   /// PUT ///
 
   router.put("/:id", restricted, (req, res) => {
-    const { value } = req.params;
+    const { id } = req.params;
     const changes = req.body;
 
-    db("value")
+    db("values")
       .where({ id })
       .update(changes)
       .then(count => {

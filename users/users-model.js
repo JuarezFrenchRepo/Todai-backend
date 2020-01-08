@@ -37,7 +37,7 @@ function findBy(username) {
 )}
 
 function findById(id) {
-  console.log('Id in model',id)
+  // console.log('Id in model',id)
   return (
   db("user_profile")
   .where({id})

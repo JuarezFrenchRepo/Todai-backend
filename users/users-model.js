@@ -8,7 +8,8 @@ module.exports = {
   update,
   remove,
   findProjects,
-  findValues
+  findValues,
+  addValue
 
 
 };
@@ -77,16 +78,27 @@ function findProjects(id) {
      
 }
 
+/// POST values by user id ///
+ 
+async function addValue(value) {
+  const [id] = await db("project_values").insert(value);
+return findById(id);
+}
 
 
+/// GET values by id ///
 
 
 function findValues(id) {
-  return db("user_profile as u")
+  return db("project_values as pv")
+      
       .select("u.username", "v.value")
-      .join("values as v", "v.id","u.values_id")
+      .join("user_profile as u","u.id","pv.user_id")
+      .join("values as v", "v.id","pv.value_id")
+      .where('pv.user_id', id)
+     
       // .orderBy("st.step_number")
-      .where("u.id", id)
+      
      
 }
 

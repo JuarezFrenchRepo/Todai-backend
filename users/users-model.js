@@ -5,13 +5,14 @@ module.exports = {
   find,
   findBy,
   update,
-  remove
+  remove,
+  findProjects
 
 
 };
 
 function find() {
-  return db('user_profile').select('id', 'username', 'password', 'email', 'phone');
+  return db('user_profile').select('*');
 }
 
 // function findBy(filter) {
@@ -28,9 +29,21 @@ function findBy(username) {
   return (
   db('user_profile')
   .where(username)
-  .select('id', 'username', 'password', 'email', 'phone')
+  .first()
+  .select('*')
   // return db('user_profile').select('id', 'username', 'password', 'email', 'phone');
 )}
+
+function findBy(id) {
+  return (
+  db('user_profile')
+  .where(id)
+  .first()
+  .select('*')
+  // return db('user_profile').select('id', 'username', 'password', 'email', 'phone');
+)}
+
+
 
 function update(username, changes) {
   return db('user_profile')
@@ -43,7 +56,23 @@ function remove(username) {
     .where({ username })
     .del();
 }
+// function findProjects(id) {
+//   return db("schemes as sc")
+//       .select("sc.scheme_name", "st.step_number", "st.instructions")
+//       .join("steps as st", "st.scheme_id"," sc.id")
+//       .orderBy("st.step_number")
+//       .where("sc.id", id)
+     
+// }
 
+function findProjects(id) {
+  return db("users_profile as u")
+      .select("u.username", "p.name")
+      .join("projects as p", "p.user_id","u.id")
+      // .orderBy("st.step_number")
+      .where("u.id", id)
+     
+}
 
 
 

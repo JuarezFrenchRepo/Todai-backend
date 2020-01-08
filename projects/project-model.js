@@ -11,7 +11,8 @@ module.exports = {
 };
 
 function find() {
-  return db('projects').select('id', 'name', 'user_id');
+  // return db('projects').select('id', 'name', 'user_id');
+  return db('projects').select('*');
 }
 
 // function findBy(filter) {

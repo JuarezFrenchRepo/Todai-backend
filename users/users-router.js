@@ -23,6 +23,14 @@ router.get("/:username", restricted, (req, res) => {
     })
     .catch(err => res.send(err));
 });
+router.get("/:id", restricted, (req, res) => {
+  const { id }  = req.params;
+  Users.findBy({ id })
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => res.send(err));
+});
 
 /// PUT ///
 
@@ -49,28 +57,6 @@ router.put("/:username", restricted, (req, res) => {
 
 /// DELETE ///
 
-// router.delete("/:username", restricted, (req, res) => {
-//   // const {username} = req.params.id;
-
-//   const { username } = req.params;
-//   // const changes = req.body;
-//   Users
-//   .findBy({ username })
-//     .remove(username)
-//     // .update(changes)
-//     .then(count => {
-//       if (count > 0) {
-//         res.status(200).json({ message: "The user has been nuked" });
-//       } else {
-//         res.status(404).json({ message: "The user could not be found" });
-//       }
-//     })
-
-//     .catch(err => {
-//       res.status(500).json({ message: "Failed to update user" });
-//     });
-// });
-
 router.delete('/:username', (req, res) => {
   const username = req.params
   db('user_profile')
@@ -88,7 +74,21 @@ router.delete('/:username', (req, res) => {
   });
 });
 
+router.get('/:id/projects', (req, res) => {
+  const {id} = req.params;
 
+  Users.findProjects(id)
+  .then(projects => {
+    if (projects) {
+      res.json(projects);
+    } else {
+      res.status(404).json({ message: 'Could not find projects for given id' })
+    }
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Failed to get projects' });
+  });
+});
 
 
 

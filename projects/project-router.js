@@ -64,6 +64,8 @@ router.put("/:id", restricted, (req, res) => {
     });
 });
 
+
+
 /// DELETE ///
 
 router.delete("/:id", restricted, (req, res) => {
@@ -86,5 +88,10 @@ router.delete("/:id", restricted, (req, res) => {
       res.status(500).json({ message: "Failed to update project" });
     });
 });
+
+
+
+
+
 
 module.exports = router;

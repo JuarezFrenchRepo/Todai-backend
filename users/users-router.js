@@ -49,26 +49,51 @@ router.put("/:username", restricted, (req, res) => {
 
 /// DELETE ///
 
-router.delete("/:username", restricted, (req, res) => {
-  // const {username} = req.params.id;
+// router.delete("/:username", restricted, (req, res) => {
+//   // const {username} = req.params.id;
 
-  const { username } = req.params;
-  // const changes = req.body;
-  Users
-  .findBy({ username })
-    .remove(username)
-    // .update(changes)
-    .then(count => {
-      if (count > 0) {
-        res.status(200).json({ message: "The user has been nuked" });
-      } else {
-        res.status(404).json({ message: "The user could not be found" });
-      }
-    })
+//   const { username } = req.params;
+//   // const changes = req.body;
+//   Users
+//   .findBy({ username })
+//     .remove(username)
+//     // .update(changes)
+//     .then(count => {
+//       if (count > 0) {
+//         res.status(200).json({ message: "The user has been nuked" });
+//       } else {
+//         res.status(404).json({ message: "The user could not be found" });
+//       }
+//     })
 
-    .catch(err => {
-      res.status(500).json({ message: "Failed to update user" });
-    });
+//     .catch(err => {
+//       res.status(500).json({ message: "Failed to update user" });
+//     });
+// });
+
+router.delete('/:username', (req, res) => {
+  const username = req.params
+  db('user_profile')
+    .where({username})
+    .del()
+  .then(count => {
+    if (count > 0) {
+      res.status(204).end();
+    } else {
+      res.status(404).json({ message: 'Record not found' });
+    }
+  })
+  .catch(error => {
+    res.status(500).json(error);
+  });
 });
+
+
+
+
+
+
+
+
 
 module.exports = router;

@@ -137,7 +137,7 @@ router.get("/:id/values", (req, res) => {
       {
          res
            .status(404)
-           .json({ message: "Could not find vales for given id" });
+           .json({ message: "Could not find values for given id" });
        }
     })
     .catch(err => {

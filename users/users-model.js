@@ -84,7 +84,7 @@ function findProjects(id) {
 function findValues(id) {
   return db("user_profile as u")
       .select("u.username", "v.value")
-      .join("values as v", "v.user_id","u.id")
+      .join("values as v", "v.id","u.values_id")
       // .orderBy("st.step_number")
       .where("u.id", id)
      

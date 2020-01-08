@@ -26,12 +26,11 @@ async function add(project) {
 }
 
 function findBy(id) {
-  return (
-  db('projects')
+  return db('projects')
   .where(id)
-  .select('id', 'name')
+  .select('*')
   // return db('project').select('id', 'project', 'password', 'email', 'phone');
-)}
+}
 
 function update(id, changes) {
   return db('projects')

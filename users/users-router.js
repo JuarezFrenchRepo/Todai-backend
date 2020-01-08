@@ -8,13 +8,14 @@ const Users = require("./users-model.js");
 /// GET ///
 
 router.get("/", restricted, (req, res) => {
-  const {username} =req.query
+  const { username } = req.query;
   const query = Users.find();
-  
-  if (username){
-    query.where({username})
+
+  if (username) {
+    query.where({ username });
   }
-    query.then(users => {
+  query
+    .then(users => {
       res.json(users);
     })
     .catch(err => res.status(500).json({ message: "Error on the GET users" }));
@@ -23,7 +24,7 @@ router.get("/", restricted, (req, res) => {
 // router.get("/", restricted, (req, res) => {
 //   const {id} =req.query
 //   const query = Users.find();
-  
+
 //   if (id){
 //     query.where({id})
 //   }
@@ -32,7 +33,6 @@ router.get("/", restricted, (req, res) => {
 //     })
 //     .catch(err => res.status(500).json({ message: "Error on the GET users" }));
 // });
-
 
 // router.get("/:username", restricted, (req, res) => {
 //   // console.log('Id in router 19',id)
@@ -53,7 +53,7 @@ router.get("/", restricted, (req, res) => {
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   Users.findById(id)
-  
+
     .then(users => {
       if (users) {
         res.json(users);
@@ -112,18 +112,35 @@ router.get("/:id/projects", (req, res) => {
     .then(projects => {
       if (projects) {
         res.json(projects);
-      } 
-      else 
-      {
-         res
-           .status(404)
-           .json({ message: "Could not find projects for given id" });
-       }
+      } else {
+        res
+          .status(404)
+          .json({ message: "Could not find projects for given id" });
+      }
     })
     .catch(err => {
       res.status(500).json({ message: "Failed to get projects" });
     });
 });
+
+/// POST values by id ///
+
+router.post("/values", (req, res) => {
+  const value = req.body;
+  Users.addValue(value)
+    .then(value => {
+      res.status(201).json(value);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: "Error adding the value"
+      });
+    });
+});
+
+/// GET values by user id ///
 
 router.get("/:id/values", (req, res) => {
   const { id } = req.params;
@@ -132,19 +149,29 @@ router.get("/:id/values", (req, res) => {
     .then(values => {
       if (values) {
         res.json(values);
-      } 
-      else 
-      {
-         res
-           .status(404)
-           .json({ message: "Could not find values for given id" });
-       }
+      } else {
+        res.status(404).json({ message: "Could not find values for given id" });
+      }
     })
     .catch(err => {
       res.status(500).json({ message: "Failed to get values" });
     });
 });
 
+/// POST values by user ///
 
+router.post("/values", (req, res) => {
+  Values.add(req.body)
+    .then(value => {
+      res.status(201).json(value);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: "Error adding the value"
+      });
+    });
+});
 
 module.exports = router;

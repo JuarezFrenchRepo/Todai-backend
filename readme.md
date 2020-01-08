@@ -1,11 +1,13 @@
-Tōdai Backend					Jan 7, 2020 1:38 pm Lambda time
+Tōdai Backend					Jan 8, 2020 9:10 am Lambda time
 
 Here are the current user endpoints for the back-end.  Values and projects will be similar, I'll post those soon. This API allows you to view, post, edit and delete users, values, projects and their associated actions.
 
 ## WHAT CHANGED:
-
+* Users - changed the "GET by username" shape and added "GET by ID"
+* Values - now has boolean true/false "select" and 'Top 3" fields. Default for both is "false". Updated the Values table to display the shortened value names.
 * Added endpoints for Values  endpoint:  `/api/values`
-* New Changes are at the bottom.
+* The GETs for all resources (users, projects, values) now return all available fields so that you can see what fields are avaiable.
+
 
  
  
@@ -34,7 +36,9 @@ The following endpoints are available.
  
  -GET /api/auth/users - gets all users
  
-- GET /api/auth/users/Homer - gets user by username
+- GET /api/auth/users?username=Homer  - gets user by username
+
+- GET /api/auth/:id - Gets user by id.
  
 - PUT /api/auth/users/Marge  - updates a given user by username:
 
@@ -86,9 +90,11 @@ The following endpoints are available.
 
  - POST    /projects - creates new project
     
+    {
     "name": "Build week app",
     "description": "Make Todai a winner."
- 
+    }
+    
 - PUT /api/projects/:id  - updates a given project by id:
 
 Change the value in the project object.
@@ -106,19 +112,19 @@ Change the value in the project object.
 
   {
     "id": 1,
-    "name": "Build week app",
-    "description": "Make Todai a winner."
+    "name": "Read the modern American classics",
+    "description": "Read the modern classics like Hemmingway, Fitzgerald et al.",
+    "user_id": 1,
+    "value_id": null
   },
   {
     "id": 2,
-    "name": "Plan Valentines Day dinner",
-    "description": "Plan a romantic or group dinner - decide."
-  },
-  {
-    "id": 3,
-    "name": "Watch NCAA football championship",
-    "description": "Watch the championship and get all the requisites."
-  },
+    "name": "Work BW App",
+    "description": "Hit MVP and bask in glory",
+    "user_id": 1,
+    "value_id": null
+  }
+]
 
   //// VALUES ////
 

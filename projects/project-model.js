@@ -4,8 +4,11 @@ module.exports = {
   add,
   find,
   findBy,
+  findById,
   update,
   remove,
+  addValue,
+  findValues
 
 
 };
@@ -43,6 +46,42 @@ function remove(id) {
     .where({ id })
     .del();
 }
+
+function findById(id) {
+  // console.log('Id in model',id)
+  return (
+  db("project_values")
+  .where({id})
+  .first()
+  .select('*')
+  // return db('user_profile').select('id', 'username', 'password', 'email', 'phone');
+)}
+
+
+/// POST values by user id ///
+ 
+async function addValue(value) {
+  const [id] = await db("project_values").insert(value);
+return findById(id);
+}
+
+
+/// GET values by id ///
+
+
+function findValues(id) {
+  return db("project_values as pv")
+      
+      .select("p.name", "v.value")
+      .join("projects as p","p.id","pv.project_id")
+      .join("values as v", "v.id","pv.value_id")
+      .where('pv.project_id', id)
+     
+      // .orderBy("st.step_number")
+      
+     
+}
+
 
 
 

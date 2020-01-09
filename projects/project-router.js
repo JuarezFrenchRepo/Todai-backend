@@ -99,7 +99,40 @@ router.delete("/:id", restricted, (req, res) => {
 });
 
 
+/// GET values by project id ///
 
+router.get("/:id/values", (req, res) => {
+  const { id } = req.params;
+
+  Project.findValues(id)
+    .then(values => {
+      if (values) {
+        res.json(values);
+      } else {
+        res.status(404).json({ message: "Could not find values for given project id" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Failed to get values for project id" });
+    });
+});
+
+/// POST values by project ///
+
+router.post("/values", (req, res) => {
+  const value = req.body
+  Project.addValue(value)
+    .then(value => {
+      res.status(201).json(value);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: "Error adding the value to the project"
+      });
+    });
+});
 
 
 

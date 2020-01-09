@@ -61,7 +61,7 @@ router.delete("/:id", restricted, (req, res) => {
   const { id } = req.params;
   // const changes = req.body;
 
-  Values.remove({ id })
+  Values.remove(id)
     // .update(changes)
     .then(count => {
       if (count > 0) {

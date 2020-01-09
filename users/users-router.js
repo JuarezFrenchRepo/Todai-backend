@@ -94,12 +94,10 @@ router.put("/:id", restricted, (req, res) => {
 
 router.delete("/:username", (req, res) => {
   const username = req.params;
-  db("user_profile")
-    .where({ username })
-    .del()
+  Users.remove(username)
     .then(count => {
       if (count > 0) {
-        res.status(204).end();
+        res.status(204).json({ message: "The user has been nuked" });
       } else {
         res.status(404).json({ message: "Record not found" });
       }

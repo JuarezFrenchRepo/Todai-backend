@@ -81,7 +81,7 @@ function findProjects(id) {
 /// POST values by user id ///
  
 async function addValue(value) {
-  const [id] = await db("project_values").insert(value);
+  const [id] = await db("user_values").insert(value);
 return findById(id);
 }
 
@@ -90,12 +90,12 @@ return findById(id);
 
 
 function findValues(id) {
-  return db("project_values as pv")
+  return db("user_values as uv")
       
       .select("u.username", "v.value")
-      .join("user_profile as u","u.id","pv.user_id")
-      .join("values as v", "v.id","pv.value_id")
-      .where('pv.user_id', id)
+      .join("user_profile as u","u.id","uv.user_id")
+      .join("values as v", "v.id","uv.value_id")
+      .where('uv.user_id', id)
      
       // .orderBy("st.step_number")
       

@@ -35,7 +35,7 @@ router.post("/login", (req, res) => {
 
         // send the token
         res.status(200).json({
-          token, username, // added token as part of the response sent
+          token, username, id, // added token as part of the response sent
           message: `Welcome ${user.username}, You're logged in!`
         });
       } else {

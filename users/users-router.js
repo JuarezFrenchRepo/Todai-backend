@@ -68,23 +68,27 @@ router.get("/:id", (req, res) => {
 
 /// PUT ///
 
-router.put("/:username", restricted, (req, res) => {
-  const { username } = req.params;
+router.put("/:id", restricted, (req, res) => {
+  const { id } = req.params;
   const changes = req.body;
-  Users.update(username, changes)
+
+  db("values")
+    .where({ id })
+    .update(changes)
     .then(count => {
       if (count) {
         res.json({ update: count });
       } else {
         res.status(404).json({
-          message: "Could not find user with that username"
+          message: "Could not find that value"
         });
       }
     })
     .catch(err => {
-      res.status(500).json({ message: "Failed to update user" });
+      res.status(500).json({ message: "Failed to update value" });
     });
-});
+})
+
 
 /// DELETE ///
 
@@ -161,9 +165,10 @@ router.get("/:id/values", (req, res) => {
 /// POST values by user ///
 
 router.post("/values", (req, res) => {
-  Values.add(req.body)
+  const value = req.body
+  Users.addValue(value)
     .then(value => {
-      res.status(201).json(value);
+      json(value);
     })
     .catch(error => {
       // log error to database
@@ -173,5 +178,27 @@ router.post("/values", (req, res) => {
       });
     });
 });
+
+/// PUT values by user///
+
+router.put("/:id/uservalues", restricted, (req, res) => {
+  const {id} = req.params;
+  const changes = req.body;
+
+  Users.updateValues(id, changes)
+  .then(value => {
+    res.status(200).json(value);
+  })
+  .catch(error => {
+    // log error to database
+    console.error(error);
+    res.status(500).json({
+      message: "Error updating the value"
+    });
+  });
+});
+
+
+
 
 module.exports = router;

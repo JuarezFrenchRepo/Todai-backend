@@ -9,7 +9,8 @@ module.exports = {
   remove,
   findProjects,
   findValues,
-  addValue
+  addValue,
+  updateValues
 
 
 };
@@ -92,13 +93,20 @@ return findById(id);
 function findValues(id) {
   return db("user_values as uv")
       
-      .select("u.username", "v.value")
+      .select("uv.id","u.username", "v.value","uv.*")
       .join("user_profile as u","u.id","uv.user_id")
       .join("values as v", "v.id","uv.value_id")
       .where('uv.user_id', id)
      
       // .orderBy("st.step_number")
-      
+}  
      
+/// PUT values by user id ///
+
+function updateValues(id,changes) {
+  return db("user_values")
+    .where({id})
+    .update(changes, '*');
 }
+
 

@@ -13,20 +13,21 @@ Here are the current user endpoints for the back-end.  Values and projects will 
  
 Base URL : https://todai-backend.herokuapp.com/
  
-## Authentication & Users
+# Authentication & Users
 Access to protected routes will require login with username and password. A json token will be issued upon login. The tokens are limited to 4 hour session.
-*Endpoints*
+
+## Endpoints
  
 The following endpoints are available.
  
   - POST    /api/auth/register - creates new user
+
  {
 "username": "Bart",
 "password": "pass",
 "email": "woof@springfield.org",
 "phone":"541-555-1312"
- 
-}
+ }
  
  - POST  /api/auth/login/ - logs registered user in, will return a token.
  {
@@ -34,7 +35,7 @@ The following endpoints are available.
 "password": "pass"
  }
  
- -GET /api/auth/users - gets all users
+- GET /api/auth/users - gets all users
  
 - GET /api/auth/users?username=Homer  - gets user by username
 
@@ -45,16 +46,15 @@ The following endpoints are available.
 Change the value in the user object.
 
  {
-"username": "Bart",
+"username": "Marge",
 "password": "pass",
-"email": "woof@springfield.org",
+"email": "marge@springfield.org",
 "phone":"541-555-1312"
- 
-}
+ }
  
 - DELETE /api/auth/users/Mo - removes a given user by username and all associated data
 
-# Model Users
+## Model Users
 
   {
     "id": 2,
@@ -78,17 +78,18 @@ Change the value in the user object.
     "phone": "541-555-1312"
   },
 
-  ## Projects
+# Projects
 Access to protected routes will require login with username and password. A json token will be issued upon login. The tokens are limited to 4 hour session.
-*Endpoints*
+
+##Endpoints
  
 The following endpoints are available.
  
- -GET /api/projects - gets all projects
+- GET /api/projects - gets all projects
  
 - GET /api/projects/id - gets project by ID
 
- - POST    /projects - creates new project
+- POST    /projects - creates new project
     
     {
     "name": "Build week app",
@@ -100,15 +101,13 @@ The following endpoints are available.
 Change the value in the project object.
 
  {
-  "id": 1,
     "name": "Build week app",
     "description": "Make Todai a winner."
+ }
  
-}
- 
-- DELETE /api/projects/1 - removes a given project by username and all associated data
+- DELETE  /api/projects/:id - removes a given project by username and all associated data
 
-# Model Projects
+## Model Projects
 
   {
     "id": 1,
@@ -117,6 +116,8 @@ Change the value in the project object.
     "user_id": 1,
     "value_id": null
   },
+
+
   {
     "id": 2,
     "name": "Work BW App",
@@ -126,9 +127,8 @@ Change the value in the project object.
   }
 ]
 
-  //// VALUES ////
 
-  ## Values
+# Values
 Access to protected routes will require login with username and password. A json token will be issued upon login. The tokens are limited to 4 hour session.
 *Endpoints*
  
@@ -140,16 +140,15 @@ The following endpoints are available.
 
  - POST  /api/values - creates new project
     
-     {
-
+  {
     "value": "Mindfulness"
 
   },
 
-  # NOTE:  There are two other fields that will be used by the front-end:
+## NOTE:  There are two other fields that will be used by the front-end:
   "top_three" (Boolean true/false) and "value_basis"  (text)  Value basis is the reason that the value is in the user's top 3. 
  
-- PUT /api/values/:id  - updates a given value by id:
+- PUT /api/values/:id  - updates a given value by value:
 
 Change the value in the project object.
 

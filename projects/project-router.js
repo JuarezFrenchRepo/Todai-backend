@@ -79,12 +79,9 @@ router.put("/:id", restricted, (req, res) => {
 
 router.delete("/:id", restricted, (req, res) => {
   // const {project} = req.params.id;
-
   const { id } = req.params;
   // const changes = req.body;
-  Project.findBy({ id })
-    .remove()
-    // .update(changes)
+  Project.remove(id)
     .then(count => {
       if (count > 0) {
         res.status(200).json({ message: "The project has been nuked" });

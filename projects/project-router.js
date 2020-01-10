@@ -120,7 +120,7 @@ router.post("/values", (req, res) => {
   const value = req.body
   Project.addValue(value)
     .then(value => {
-      res.status(201).json({ message: "Project successfully added." });
+      res.status(201).json(value);
     })
     .catch(error => {
       // log error to database
